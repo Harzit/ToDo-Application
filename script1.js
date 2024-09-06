@@ -7,11 +7,37 @@ function onDelete(i){
 
 function onAdd(){
     const elem = document.getElementById("taska");
-    const betaNode = document.createElement("div");
-    betaNode.innerHTML = "<div id='todo" + currentIndex + "'><h4>" + elem.value + '</h4> <button onclick="onDelete('+ currentIndex + ')">DELETE</button>';
-    const papaNode = document.getElementById("todos");
-    papaNode.appendChild(betaNode);
+    const betaText = elem.value.trim();
     
-    currentIndex = currentIndex + 1;
+    if (betaText === '') {
+        alert('Please enter a todo item.');
+        return;
+    }
+    
+    const papaNode = document.getElementById("todos");
+    
+    //new div
+    const betaNode = document.createElement("div");
+    betaNode.setAttribute("id", 'todo'+currentIndex);
+
+    //new heading
+    const nayiHeading = document.createElement("h4");
+    nayiHeading.textContent = currentIndex + '. ' + betaText;
+
+    //new button
+    const nayaButton = document.createElement("button");
+    nayaButton.textContent = "DELETE";
+    nayaButton.setAttribute("onclick", "onDelete("+currentIndex+")");
+    
+    //add
+    betaNode.appendChild(nayiHeading);
+    betaNode.appendChild(nayaButton);
+
+    //final
+    papaNode.appendChild(betaNode); 
+    
+    currentIndex++;
+
+    elem.value="";
 
 }
